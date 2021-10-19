@@ -36,9 +36,7 @@ export const PokedexPage = () => {
             <Header />
             <ConteinerPokedex>
                 <GridConteiner>
-                    <PokeCard />
-                    <PokeCard />
-                    <PokeCard />
+                   
                 </GridConteiner>
             </ConteinerPokedex>
             <h1>Pokedex</h1>
