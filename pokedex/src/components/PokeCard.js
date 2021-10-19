@@ -1,7 +1,11 @@
-import React from "react";
+import axios from "axios";
+import React, { useState } from "react";
 import styled from "styled-components";
 
 const Cardpokemon = styled.div`
+display: flex;
+flex-direction: column;
+justify-content: space-between;
 border: solid black 1px;
 padding: 10px;
 border-radius: 5px;
@@ -10,6 +14,9 @@ div{
     display: flex;
     justify-content: center;
     align-items: center;
+    img{
+        height: 100%;
+    }
 }
 `
 const Botao1 = styled.button`
@@ -40,15 +47,25 @@ const Botao2 = styled.button`
 `
 
 const PokeCard = (props) => {
+    const [imagemPokemon, setImagemPokemon] = useState()
 
+    axios.get(`${props.url}`)
+        .then((res) => {
+            console.log(res.data.sprites.versions['generation-v']['black-white'].animated.front_default)
+            setImagemPokemon(res.data.sprites.versions['generation-v']['black-white'].animated.front_default)
+        })
     return (
         <Cardpokemon>
-            <img src="https://picsum.photos/200/200" alt="pokemon"></img>
-            <h2>nome do pokemon</h2>
             <div>
-                <Botao1 onClick={() => { props.irParaDetalhes() }}>Detalhes</Botao1>
-                <Botao2>Adicionar na Pokedéx</Botao2>
+                <img src={imagemPokemon} alt="pokemon"></img>
             </div>
+            <span>
+                <h2>{props.name}</h2>
+                <div>
+                    <Botao1 onClick={() => { props.irParaDetalhes() }}>Detalhes</Botao1>
+                    <Botao2>Adicionar na Pokedéx</Botao2>
+                </div>
+            </span>
         </Cardpokemon>
     )
 }
