@@ -20,15 +20,13 @@ button{
     }
 }
 `
-const Header = () => {
-    const history = useHistory()
-    const irParaPokedex = () => {
-        history.push("/pokedex")
-    }
+const Header = (props) => {
+ 
+
     return (
         <ConteinerHeader>
             <h1>Pokemon Show</h1>
-            <button onClick={irParaPokedex}>Ir Para Pokedéx</button>
+            <button onClick={() => props.mudarPagina()}>{props.nome}</button>
         </ConteinerHeader>
     )
 }

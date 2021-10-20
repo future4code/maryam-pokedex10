@@ -1,6 +1,8 @@
 import axios from "axios";
 import React, { useState } from "react";
+import { useHistory } from "react-router";
 import styled from "styled-components";
+
 
 const Cardpokemon = styled.div`
 display: flex;
@@ -10,6 +12,7 @@ border: solid black 1px;
 padding: 10px;
 border-radius: 5px;
 box-shadow: black;
+
 div{
     display: flex;
     justify-content: center;
@@ -48,12 +51,22 @@ const Botao2 = styled.button`
 
 const PokeCard = (props) => {
     const [imagemPokemon, setImagemPokemon] = useState()
+    const [id, setId] = useState()
+    const history = useHistory()
 
     axios.get(`${props.url}`)
         .then((res) => {
-            console.log(res.data.sprites.versions['generation-v']['black-white'].animated.front_default)
+            setId(res.data.id)
             setImagemPokemon(res.data.sprites.versions['generation-v']['black-white'].animated.front_default)
+        }).catch((err)=> {
+            window.alert(err.response)
         })
+
+        const irParaDetalhes = (id) => {
+            history.push(`/detalhe/${id}`)
+        }
+        
+
     return (
         <Cardpokemon>
             <div>
@@ -62,7 +75,7 @@ const PokeCard = (props) => {
             <span>
                 <h2>{props.name}</h2>
                 <div>
-                    <Botao1 onClick={() => { props.irParaDetalhes() }}>Detalhes</Botao1>
+                    <Botao1 onClick={() => {irParaDetalhes(id) }}>Detalhes</Botao1>
                     <Botao2>Adicionar na Pokedéx</Botao2>
                 </div>
             </span>
