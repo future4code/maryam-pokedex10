@@ -26,9 +26,7 @@ export const HomePage = (props) => {
 
 
   
-    //  const listapokemon = props.dados && props.dados.map((pokemon)=>{
-    //      return <PokeCard key={pokemon.name} name = {pokemon.name} url = {pokemon.url} irParaDetalhes = {irParaDetalhes} />
-    //  })
+   
      const irParaPokedex = () => {
         history.push("/pokedex")
     }
