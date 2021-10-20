@@ -19,45 +19,31 @@ justify-content: center;
 align-items: center;
 `
 
-export const HomePage = () => {
-
-    const [dados, setDados] = useState([])
-
-    useEffect(()=>{
-        axios.get("https://pokeapi.co/api/v2/pokemon/")
-        .then((res)=>{
-           setDados(res.data.results)
-        }).catch((err)=>{
-            window.alert(err)
-        })
-    }, [])
+export const HomePage = (props) => {
 
 
     const history = useHistory()
 
-    const irParaPokedex = () => {
+
+  
+    //  const listapokemon = props.dados && props.dados.map((pokemon)=>{
+    //      return <PokeCard key={pokemon.name} name = {pokemon.name} url = {pokemon.url} irParaDetalhes = {irParaDetalhes} />
+    //  })
+     const irParaPokedex = () => {
         history.push("/pokedex")
     }
-
-    const irParaDetalhes = () => {
-        history.push("/detalhe")
-    }
-     
-     const listapokemon = dados && dados.map((pokemon)=>{
-         return <PokeCard key={pokemon.name} name = {pokemon.name} url = {pokemon.url} irParaDetalhes = {irParaDetalhes}/>
-     })
     
     return (
         <div>
-            <Header />
+            <Header  mudarPagina = {irParaPokedex} nome = {"Ir Para Pokedex"}/>
             <ConteinerHome>
             <GridConteiner>
-            {listapokemon}
+            {props.listapokemon}
             </GridConteiner>
             </ConteinerHome>
             <h1>Home</h1>
             <button onClick={irParaPokedex}>Pokedex</button>
-            <button onClick={irParaDetalhes}>Detalhes</button>
+            <button onClick={props.irParaDetalhes}>Detalhes</button>
         </div>
     )
 }

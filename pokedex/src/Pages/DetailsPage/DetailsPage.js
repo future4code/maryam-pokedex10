@@ -1,23 +1,41 @@
-import React from "react";
-import { useHistory } from "react-router";
+import axios from "axios";
+import React, { useEffect, useState } from "react";
+import { useHistory, useParams } from "react-router";
 import Header from "../../components/Header";
 import { ConteinerDetalhes, DivImagens, DivStatus, ConteinerTipoAtaques, DivTipos, DivAtaques } from "./Styled"
 
 export const DetailsPage = () => {
+    const [imagemFrente, setImagemFrente] = useState({})
+    const [imagemCostas, setImagemCostas] = useState({})
 
+    const params = useParams()
+    console.log( "seu sou params", params)
     const history = useHistory()
 
     const irParaHome = () => {
-        history.goBack()
+        history.push("/")
     }
+    useEffect(()=>{
+        axios.get(`https://pokeapi.co/api/v2/pokemon/${params.id}`)
+        .then((res) => {
+            setImagemFrente( res.data.sprites.versions['generation-v']['black-white'].animated.front_default)
+            setImagemCostas(res.data.sprites.versions['generation-v']['black-white'].animated.back_default)
+        }).catch((err)=>{
+            console.log(err.response)
+        })
+    },[])
+    
+ 
+
+   
 
     return (
         <div>
-            <Header />
+            <Header mudarPagina = {irParaHome} nome = {"Ir Para Home"}/>
             <ConteinerDetalhes>
                 <DivImagens>
-                    <img src="https://picsum.photos/200/200"></img>
-                    <img src="https://picsum.photos/200/200"></img>
+                    <img src={imagemFrente}></img>
+                    <img src={imagemCostas}></img>
                 </DivImagens>
                 <DivStatus>
                     <h2>Status</h2>
