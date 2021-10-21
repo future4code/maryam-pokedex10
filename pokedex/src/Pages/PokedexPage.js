@@ -33,6 +33,7 @@ export const PokedexPage = () => {
     const irParaHome = () => {
         history.push("/")
     }
+   
 
     return (
         <div>
