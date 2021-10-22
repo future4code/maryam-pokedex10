@@ -1,24 +1,23 @@
-import React, { useEffect, useState } from "react";
-import { useHistory } from "react-router";
+import React, { useEffect, useContext } from "react";
+import { GlobalStateContext } from "../global/GlobalStateContext"
 import Header from "../components/Header";
 import PokeCard from "../components/PokeCard";
-import styled from "styled-components";
-import axios from "axios";
+import {GridConteiner, ConteinerHome} from "../styled/HomeStyled";
 
-const GridConteiner = styled.div`
-display: grid;
-grid-template-columns: repeat(5, 1fr);
-column-gap: 60px;
-padding: 40px;
-row-gap: 30px;
+<<<<<<< HEAD
+export const HomePage = () => {
 
-`
-const ConteinerHome = styled.div`
-display: flex;
-justify-content: center;
-align-items: center;
-`
+    const {states, setters, requests} = useContext(GlobalStateContext)
 
+    useEffect(() => {
+        requests.getPokemons()
+    }, [states, setters, requests])
+
+    const pokemonsName = states.pokemons.map((pokemon) => {
+        return <PokeCard key={pokemon.id} name={pokemon.name} url={pokemon.url} />     
+    })
+        
+=======
 export const HomePage = (props) => {
 
 
@@ -31,17 +30,24 @@ export const HomePage = (props) => {
         history.push("/pokedex")
     }
     
+>>>>>>> master
     return (
         <div>
             <Header  mudarPagina = {irParaPokedex} nome = {"Ir Para Pokedex"}/>
             <ConteinerHome>
             <GridConteiner>
+<<<<<<< HEAD
+            {pokemonsName}
+            </GridConteiner>
+            </ConteinerHome>
+=======
             {props.listapokemon}
             </GridConteiner>
             </ConteinerHome>
             <h1>Home</h1>
             <button onClick={irParaPokedex}>Pokedex</button>
             <button onClick={props.irParaDetalhes}>Detalhes</button>
+>>>>>>> master
         </div>
     )
 }

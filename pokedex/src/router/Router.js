@@ -1,11 +1,17 @@
 
 import { BrowserRouter, Switch, Route } from "react-router-dom";
+<<<<<<< HEAD
+import { HomePage } from "../pages/HomePage";
+import { PokedexPage } from "../pages/PokedexPage";
+import { DetailsPage } from "../pages/DetailsPage";
+=======
 import PokeCard from "../components/PokeCard";
 import { HomePage } from "../Pages/HomePage";
 import { PokedexPage } from "../Pages/PokedexPage";
 import { DetailsPage } from "../Pages/DetailsPage/DetailsPage"
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+>>>>>>> master
 
 export const Router = () => {
     const [dados, setDados] = useState([])
@@ -43,8 +49,13 @@ export const Router = () => {
                 <Route exact path="/pokedex">
                     <PokedexPage />
                 </Route>
+<<<<<<< HEAD
+                <Route exact path="/details/:name">
+                    <DetailsPage />
+=======
                 <Route exact path="/detalhe/:id" component = {DetailsPage}>
                    
+>>>>>>> master
                 </Route>
             </Switch>
         </BrowserRouter>

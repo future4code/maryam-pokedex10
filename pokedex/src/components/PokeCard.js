@@ -1,5 +1,10 @@
-import axios from "axios";
 import React, { useState } from "react";
+<<<<<<< HEAD
+import axios from "axios";
+import { useHistory } from "react-router";
+import { Cardpokemon, Botao1, Botao2 } from "./stled";
+import { goToPokeDetails } from "../router/Coordinator";
+=======
 import { useHistory } from "react-router";
 import styled from "styled-components";
 
@@ -48,9 +53,23 @@ const Botao2 = styled.button`
         cursor: pointer;
     }
 `
+>>>>>>> master
 
 const PokeCard = (props) => {
+    
+    const history = useHistory()
+    
     const [imagemPokemon, setImagemPokemon] = useState()
+<<<<<<< HEAD
+    
+    axios.get(props.url)
+        .then((response) => {
+            setImagemPokemon(response.data.sprites.versions['generation-v']['black-white'].animated.front_default)
+        }).catch((error) => { 
+            console.log(error)           
+        })
+
+=======
     const [id, setId] = useState()
     const history = useHistory()
 
@@ -67,11 +86,19 @@ const PokeCard = (props) => {
         }
         
 
+>>>>>>> master
     return (
         <Cardpokemon>
             <div>
-                <img src={imagemPokemon} alt="pokemon"></img>
+                <img src={imagemPokemon} alt={props.name}/>
             </div>
+            <h2>{props.name}</h2>
+            <div>
+                <Botao1>Adicionar</Botao1>
+                <Botao2 onClick={() => goToPokeDetails(history, props.name)}>Detalhes</Botao2>
+            </div>
+<<<<<<< HEAD
+=======
             <span>
                 <h2>{props.name}</h2>
                 <div>
@@ -79,6 +106,7 @@ const PokeCard = (props) => {
                     <Botao2>Adicionar na Pokedéx</Botao2>
                 </div>
             </span>
+>>>>>>> master
         </Cardpokemon>
     )
 }
