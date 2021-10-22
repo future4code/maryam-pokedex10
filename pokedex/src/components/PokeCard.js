@@ -1,31 +1,49 @@
-import React, { useState } from "react";
-import axios from "axios";
+import React, { useContext} from "react";
 import { useHistory } from "react-router";
 import { Cardpokemon, Botao1, Botao2 } from "./stled";
 import { goToPokeDetails } from "../router/Coordinator";
+import { GlobalStateContext } from "../global/GlobalStateContext";
 
 const PokeCard = (props) => {
     
     const history = useHistory()
-    
-    const [imagemPokemon, setImagemPokemon] = useState()
-    
-    axios.get(props.url)
-        .then((response) => {
-            setImagemPokemon(response.data.sprites.versions['generation-v']['black-white'].animated.front_default)
-        }).catch((error) => { 
-            console.log(error)           
+    const {listaPokemon, setListaPokemon, pokedex, setPokedex}=useContext(GlobalStateContext)
+    console.log(listaPokemon)
+    const adicionarPokemon = ()=>{
+        const pokeIndex = listaPokemon.findIndex(
+            (item)=> item.name === props.poke.name 
+        );
+        const novaListaDePokemon = [...listaPokemon]
+        novaListaDePokemon.splice(pokeIndex, 1)
+        const ordenarListaPokemons = novaListaDePokemon.sort((a,b)=>{
+            return a.id - b.id
         })
+        const novaListaDePokedex = [...pokedex, props.poke]
+        const ordenarListaPokedex = novaListaDePokedex.sort((a, b)=>{
+            return a.id - b.id
+        })
+        setListaPokemon(ordenarListaPokemons)
+        setPokedex(ordenarListaPokedex)
+    }
+    
+    const removeDaPokedex = ()=>{
+        const pokeIndex = pokedex.findIndex(
+            (item) => item.name === props.poke.name
+        );
+
+        
+        
+    }
 
     return (
         <Cardpokemon>
             <div>
-                <img src={imagemPokemon} alt={props.name}/>
+                <img src={props.poke && props.poke.sprites.versions['generation-v']['black-white'].animated.front_default} alt={props.poke.name}/>
             </div>
-            <h2>{props.name}</h2>
+            <h2>{props.poke.name}</h2>
             <div>
-                <Botao1>Adicionar</Botao1>
-                <Botao2 onClick={() => goToPokeDetails(history, props.name)}>Detalhes</Botao2>
+                <Botao1 onClick={props.isPokedex ? removeDaPokedex : adicionarPokemon}>Adicionar</Botao1>
+                <Botao2 onClick={() => goToPokeDetails(history, props.poke.name)}>Detalhes</Botao2>
             </div>
         </Cardpokemon>
     )

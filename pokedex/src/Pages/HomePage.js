@@ -1,24 +1,24 @@
-import React, { useEffect, useContext } from "react";
+import React, { useContext } from "react";
 import { GlobalStateContext } from "../global/GlobalStateContext"
 import Header from "../components/Header";
 import PokeCard from "../components/PokeCard";
 import {GridConteiner, ConteinerHome} from "../styled/HomeStyled";
+ import { goToPokedex } from "../router/Coordinator";
+ import { useHistory } from "react-router";
 
 export const HomePage = () => {
 
-    const {states, setters, requests} = useContext(GlobalStateContext)
+    const {states} = useContext(GlobalStateContext)
+    const history = useHistory()
 
-    useEffect(() => {
-        requests.getPokemons()
-    }, [states, setters, requests])
 
-    const pokemonsName = states.pokemons.map((pokemon) => {
-        return <PokeCard key={pokemon.id} name={pokemon.name} url={pokemon.url} />     
+    const pokemonsName = states.listaPokemon.map((poke) => {
+        return <PokeCard key={poke.name} poke={poke} />     
     })
         
     return (
         <div>
-            <Header />
+            <Header titulo = {"Ir Para Pokedex"} mudarPagina={()=> goToPokedex(history)}/>
             <ConteinerHome>
             <GridConteiner>
             {pokemonsName}

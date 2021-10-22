@@ -4,6 +4,7 @@ import { useHistory, useParams } from "react-router";
 import { goToHome } from "../router/Coordinator";
 import Header from "../components/Header";
 import { ConteinerDetalhes, DivImagens, DivStatus, ConteinerTipoAtaques, DivTipos, DivAtaques } from "../styled/DetailsStyled"
+import { useEffect } from "react/cjs/react.development";
 
 export const DetailsPage = () => {
 
@@ -11,8 +12,8 @@ export const DetailsPage = () => {
     const {name} = useParams()
     const [details, setDetails] = useState({})
 
-
-    axios.get(`https://pokeapi.co/api/v2/pokemon/${name}`)
+    useEffect(()=>{
+        axios.get(`https://pokeapi.co/api/v2/pokemon/${name}`)
         .then((response) => {
             console.log(response.data)
             setDetails(response.data)          
@@ -20,9 +21,11 @@ export const DetailsPage = () => {
             console.log(error)          
         })
 
+    },[])
+
     return (
         <div>
-            <Header />
+            <Header mudarPagina = {()=> history.goBack()} titulo ={"Voltar"}/>
             <h1>Detalhes</h1>
             <ConteinerDetalhes>
                 <DivImagens>
@@ -39,7 +42,7 @@ export const DetailsPage = () => {
                     <DivTipos>
                         <h2>Tipo</h2>
                         {details.types && details.types.map((type) => {
-                            return <i>{type.type.name}</i>
+                            return <p>{type.type.name}</p>
                         })}
                     </DivTipos>
                     <DivAtaques>
