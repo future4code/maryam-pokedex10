@@ -1,8 +1,10 @@
-import React from "react";
+import React, { useContext } from "react";
 import { useHistory } from "react-router";
 import Header from "../components/Header";
 import PokeCard from "../components/PokeCard";
 import styled from "styled-components";
+import { goToHome } from "../router/Coordinator";
+import { GlobalStateContext } from "../global/GlobalStateContext";
 
 const GridConteiner = styled.div`
 display: grid;
@@ -19,7 +21,7 @@ align-items: center;
 `
 
 export const PokedexPage = () => {
-
+    const { pokedex } = useContext(GlobalStateContext)
     const history = useHistory()
 
     const voltar = () => {
@@ -30,22 +32,20 @@ export const PokedexPage = () => {
         history.push("/detalhe")
     }
 
-    const irParaHome = () => {
-        history.push("/")
-    }
+
+
    
 
     return (
         <div>
-            <Header mudarPagina={() => irParaHome()} nome = {"Ir Para Home"} />
+            <Header mudarPagina={() => goToHome(history)} titulo = {"Ir Para Home"} />
             <ConteinerPokedex>
                 <GridConteiner>
-                   
+                   {pokedex && pokedex.map((pokemon)=>{
+                       return <PokeCard isPokedex key={pokemon.id} name={pokemon.name} url={pokemon.url} />
+                   })}
                 </GridConteiner>
             </ConteinerPokedex>
-            <h1>Pokedex</h1>
-            <button onClick={voltar}>Voltar</button>
-            <button onClick={irParaDetalhes}>Detalhes</button>
         </div>
     )
 }
