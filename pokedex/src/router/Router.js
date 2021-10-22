@@ -1,8 +1,8 @@
 import React from "react";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
-import { HomePage } from "../Pages/HomePage";
-import { PokedexPage } from "../Pages/PokedexPage";
-import { DetailsPage } from "../Pages/DetailsPage/DetailsPage"
+import { HomePage } from "../pages/HomePage";
+import { PokedexPage } from "../pages/PokedexPage";
+import { DetailsPage } from "../pages/DetailsPage";
 
 export const Router = () => {
     return (
@@ -14,7 +14,7 @@ export const Router = () => {
                 <Route exact path="/pokedex">
                     <PokedexPage />
                 </Route>
-                <Route exact path="/detalhe">
+                <Route exact path="/details/:name">
                     <DetailsPage />
                 </Route>
             </Switch>

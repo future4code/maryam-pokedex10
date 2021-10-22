@@ -1,63 +1,29 @@
-import React, { useEffect, useState } from "react";
-import { useHistory } from "react-router";
+import React, { useEffect, useContext } from "react";
+import { GlobalStateContext } from "../global/GlobalStateContext"
 import Header from "../components/Header";
 import PokeCard from "../components/PokeCard";
-import styled from "styled-components";
-import axios from "axios";
-
-const GridConteiner = styled.div`
-display: grid;
-grid-template-columns: repeat(5, 1fr);
-column-gap: 60px;
-padding: 40px;
-row-gap: 30px;
-
-`
-const ConteinerHome = styled.div`
-display: flex;
-justify-content: center;
-align-items: center;
-`
+import {GridConteiner, ConteinerHome} from "../styled/HomeStyled";
 
 export const HomePage = () => {
 
-    const [dados, setDados] = useState([])
+    const {states, setters, requests} = useContext(GlobalStateContext)
 
-    useEffect(()=>{
-        axios.get("https://pokeapi.co/api/v2/pokemon/")
-        .then((res)=>{
-           setDados(res.data.results)
-        }).catch((err)=>{
-            window.alert(err)
-        })
-    }, [])
+    useEffect(() => {
+        requests.getPokemons()
+    }, [states, setters, requests])
 
-
-    const history = useHistory()
-
-    const irParaPokedex = () => {
-        history.push("/pokedex")
-    }
-
-    const irParaDetalhes = () => {
-        history.push("/detalhe")
-    }
-     
-     const listapokemon = dados && dados.map((pokemon)=>{
-         return <PokeCard key={pokemon.name} name = {pokemon.name} url = {pokemon.url} irParaDetalhes = {irParaDetalhes}/>
-     })
-    
+    const pokemonsName = states.pokemons.map((pokemon) => {
+        return <PokeCard key={pokemon.id} name={pokemon.name} url={pokemon.url} />     
+    })
+        
     return (
         <div>
             <Header />
             <ConteinerHome>
             <GridConteiner>
-            {listapokemon}
+            {pokemonsName}
             </GridConteiner>
             </ConteinerHome>
-            <h1>Home</h1>
-            <button onClick={irParaPokedex}>Pokedex</button>
-            <button onClick={irParaDetalhes}>Detalhes</button>
         </div>
     )
 }
