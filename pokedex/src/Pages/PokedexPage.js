@@ -22,7 +22,7 @@ export const PokedexPage = () => {
 
     const history = useHistory()
 
-    const irParaHome = () => {
+    const voltar = () => {
         history.goBack()
     }
 
@@ -30,17 +30,21 @@ export const PokedexPage = () => {
         history.push("/detalhe")
     }
 
+    const irParaHome = () => {
+        history.push("/")
+    }
+   
 
     return (
         <div>
-            <Header />
+            <Header mudarPagina={() => irParaHome()} nome = {"Ir Para Home"} />
             <ConteinerPokedex>
                 <GridConteiner>
                    
                 </GridConteiner>
             </ConteinerPokedex>
             <h1>Pokedex</h1>
-            <button onClick={irParaHome}>Voltar</button>
+            <button onClick={voltar}>Voltar</button>
             <button onClick={irParaDetalhes}>Detalhes</button>
         </div>
     )

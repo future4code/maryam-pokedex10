@@ -13,6 +13,7 @@ height: 60vh;
 img{
     border: solid black 1px;
     padding: 10px;
+    height: 140px;
 }
 `
 export const DivStatus = styled.div`
