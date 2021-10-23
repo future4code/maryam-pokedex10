@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { useHistory } from "react-router";
+import { useHistory } from "react-router-dom";
 import Header from "../components/Header";
 import PokeCard from "../components/PokeCard";
 import styled from "styled-components";

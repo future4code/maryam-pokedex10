@@ -1,7 +1,6 @@
 import React, {useState} from "react";
 import axios from "axios";
-import { useHistory, useParams } from "react-router";
-import { goToHome } from "../router/Coordinator";
+import { useHistory, useParams } from "react-router-dom";
 import Header from "../components/Header";
 import { ConteinerDetalhes, DivImagens, DivStatus, ConteinerTipoAtaques, DivTipos, DivAtaques } from "../styled/DetailsStyled"
 import { useEffect } from "react/cjs/react.development";

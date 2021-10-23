@@ -4,7 +4,7 @@ import Header from "../components/Header";
 import PokeCard from "../components/PokeCard";
 import {GridConteiner, ConteinerHome} from "../styled/HomeStyled";
  import { goToPokedex } from "../router/Coordinator";
- import { useHistory } from "react-router";
+ import { useHistory } from "react-router-dom";
 
 export const HomePage = () => {
 

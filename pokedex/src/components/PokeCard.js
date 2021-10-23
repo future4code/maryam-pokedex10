@@ -1,5 +1,5 @@
 import React, { useContext} from "react";
-import { useHistory } from "react-router";
+import { useHistory } from "react-router-dom";
 import { Cardpokemon, Botao1, Botao2 } from "./stled";
 import { goToPokeDetails } from "../router/Coordinator";
 import { GlobalStateContext } from "../global/GlobalStateContext";
