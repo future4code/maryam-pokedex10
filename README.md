@@ -1,16 +1,17 @@
 # POKEDEX
 
 Nome dos integrantes: 
-- Pessoa 1
-- Pessoa 2
-- Pessoa 3
+- Eduardo Henrique Sousa Moraes
+- Luiz Ricardo da Silva
+- Patrícia Dias Baldez
 
-Link do Surge: www.link.com.br
+Link do Surge:
+https://afraid-advertisement.surge.sh/
 
 O que funciona:
-- Item 1
-- Item 2
+- transição entre as páginas
+- botão de adicionar/remover
+- ver detalhes do pokemon
 
 O que não funciona: 
-- Item 3
-- Item 4
+- O desafio 
