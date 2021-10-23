@@ -41,7 +41,8 @@ export const GlobalState = (props) => {
     })
   }
 
-  const states = {listaPokemon, pokedex}
+  const states = {listaPokemon,pokedex}
+
   const setters = {setListaPokemon, setPokedex}
 
   return (

@@ -25,12 +25,11 @@ export const DetailsPage = () => {
 
     return (
         <div>
-            <Header mudarPagina = {()=> history.goBack()} titulo ={"Voltar"}/>
-            <h1>Detalhes</h1>
+            <Header mudarPagina = {()=> history.goBack()} titulo ={"Voltar Página"}/>
             <ConteinerDetalhes>
                 <DivImagens>
-                    <img src={details.sprites && details.sprites.versions['generation-v']['black-white'].animated.front_default}/>
-                    <img src={details.sprites && details.sprites.versions['generation-v']['black-white'].animated.back_default}/>
+                   <div> <img src={details.sprites && details.sprites.versions['generation-v']['black-white'].animated.front_default}/></div>
+                   <div> <img src={details.sprites && details.sprites.versions['generation-v']['black-white'].animated.back_default}/></div>
                 </DivImagens>
                 <DivStatus>
                     <h2>Status</h2>
@@ -40,20 +39,18 @@ export const DetailsPage = () => {
                 </DivStatus>
                 <ConteinerTipoAtaques>
                     <DivTipos>
-                        <h2>Tipo</h2>
                         {details.types && details.types.map((type) => {
-                            return <p>{type.type.name}</p>
+                            return <p><b>{type.type.name}</b></p>
                         })}
                     </DivTipos>
                     <DivAtaques>
                         <h2>Principais Ataques</h2>
                         {details.moves && details.moves.map((attack, indexOfAttacks) => {
-                            return indexOfAttacks < 3 && <p>{attack.move.name}</p>
+                            return indexOfAttacks < 5 && <p>{attack.move.name}</p>
                         })}
                     </DivAtaques>
                 </ConteinerTipoAtaques>
             </ConteinerDetalhes>
-            <button onClick={() => goToHome(history)}>Voltar</button>
         </div>
     )
 }

@@ -21,19 +21,9 @@ align-items: center;
 `
 
 export const PokedexPage = () => {
-    const { pokedex } = useContext(GlobalStateContext)
+    const { states } = useContext(GlobalStateContext)
+    const { pokedex } = states
     const history = useHistory()
-
-    const voltar = () => {
-        history.goBack()
-    }
-
-    const irParaDetalhes = () => {
-        history.push("/detalhe")
-    }
-
-
-
    
 
     return (
@@ -41,8 +31,8 @@ export const PokedexPage = () => {
             <Header mudarPagina={() => goToHome(history)} titulo = {"Ir Para Home"} />
             <ConteinerPokedex>
                 <GridConteiner>
-                   {pokedex && pokedex.map((pokemon)=>{
-                       return <PokeCard isPokedex key={pokemon.id} name={pokemon.name} url={pokemon.url} />
+                   {pokedex && pokedex.map((poke)=>{
+                       return <PokeCard isPokedex key={poke.id} name={poke.name} url={poke.url} poke = {poke} />
                    })}
                 </GridConteiner>
             </ConteinerPokedex>
