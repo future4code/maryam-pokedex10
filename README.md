@@ -14,4 +14,4 @@ O que funciona:
 - ver detalhes do pokemon
 
 O que não funciona: 
-- O desafio 
+- O desafio .
